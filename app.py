@@ -25,7 +25,7 @@ app.config.from_object('config')
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-####################################
+#################################### functions to support Models
 
 def get_venue(venue_id):
       return Venue.query.get(venue_id)
@@ -286,7 +286,6 @@ def create_venue_submission():
       city=request.form.get('city'),
       state=request.form.get('state'),
       address=request.form.get('address'),
-      # genres=request.form.getlist('genres'),
       phone=request.form.get('phone'),
       facebook_link=request.form.get('facebook_link'),
       image_link=request.form.get('image_link'),
@@ -407,7 +406,6 @@ def edit_artist_submission(artist_id):
 
   try:
     artist = Artist.query.filter_by(id=artist_id).all()[0]
-
     artist.name=request.form.get('name')
     artist.city=request.form.get('city')
     artist.state=request.form.get('state')
