@@ -228,7 +228,7 @@ def venues():
 
     return render_template('pages/venues.html', areas=areas)
   except:
-    flash('An error occurred. No venues to display currently')
+    flash('Error. No venue to display.')
     return redirect(url_for('index'))
 
 
@@ -252,7 +252,7 @@ def search_venues():
 
     return render_template('pages/search_venues.html', results=response, search_term=request.form.get('search_term', ''))
   except:
-    flash('An error occurred while searching, please try again')
+    flash('Search Error, please try again')
     return redirect(url_for('venues'))
 
 
@@ -264,7 +264,7 @@ def show_venue(venue_id):
 
     return render_template('pages/show_venue.html', venue=data.full_details_with_shows)
   except:
-    flash('Sorry, we couldn\'t show that venue')
+    flash('Sorry, we could not show requested venue')
     return redirect(url_for('index'))
 
 #  Create Venue
@@ -303,9 +303,9 @@ def create_venue_submission():
     db.session.close()
 
   if not error:
-    flash('Venue ' + request.form['name'] + ' was successfully listed!')
+    flash('Venue ' + request.form['name'] + ' was successfully displayed')
   else:
-    flash('An error occurred. Venue ' + new_venue.name + ' could not be listed.')
+    flash('Error. Venue ' + new_venue.name + ' could not be displayed.')
     
   return redirect(url_for('index'))
 
@@ -324,7 +324,7 @@ def delete_venue(venue_id):
     db.session.close()
 
   if error:
-    flash('An error occurred when deleting venue, please try again later')
+    flash('Error, please try again later')
     return redirect(url_for('index'))
   else:
     flash('Successfully deleted venue')
@@ -341,7 +341,7 @@ def artists():
 
     return render_template('pages/artists.html', artists=data)
   except:
-    flash('An error occurred. No artists to display currently')
+    flash('Error. No artists to display currently')
     return redirect(url_for('index'))
 
 @app.route('/artists/search', methods=['POST'])
@@ -363,7 +363,7 @@ def search_artists():
 
     return render_template('pages/search_artists.html', results=response, search_term=request.form.get('search_term', ''))
   except:
-    flash('An error occurred while searching, please try again')
+    flash('Error while searching, please try again')
     return redirect(url_for('artists'))
 
 @app.route('/artists/<int:artist_id>')
@@ -374,7 +374,7 @@ def show_artist(artist_id):
 
     return render_template('pages/show_artist.html', artist=data.full_details_with_shows)
   except:
-    flash('Sorry, we couldn\'t show that artist')
+    flash('Sorry, we could not show requested artist')
     return redirect(url_for('index'))
 
 
@@ -420,7 +420,7 @@ def edit_artist_submission(artist_id):
     db.session.commit()
   except:
     db.session.rollback()
-    flash('An error occurred. Artist could not be updated')
+    flash('Error. Artist could not be updated')
   finally:
     db.session.close()
 
@@ -466,7 +466,7 @@ def edit_venue_submission(venue_id):
     db.session.commit()
   except:
     db.session.rollback()
-    flash('An error occurred. Venue could not be updated')
+    flash('Error. Venue could not be updated')
   finally:
     db.session.close()
 
@@ -510,9 +510,9 @@ def create_artist_submission():
     db.session.close()
 
   if not error:
-    flash('Artist ' + request.form['name'] + ' was successfully listed!')
+    flash('Artist ' + request.form['name'] + ' was successfully displayed')
   else:
-    flash('An error occurred. Artist ' + new_artist.name + ' could not be listed.')
+    flash('Error. Artist ' + new_artist.name + ' could not be displayed.')
 
   return redirect(url_for('index'))
 
@@ -529,7 +529,7 @@ def list_shows():
 
     return render_template('pages/shows.html', shows=available_shows)
   except:
-    flash('An error occurred. No shows to display currently')
+    flash('Error. No show to display currently')
     return redirect(url_for('index'))
 
 @app.route('/shows/create')
@@ -558,9 +558,9 @@ def create_show_submission():
     db.session.close()
 
   if not error:
-    flash('Show was successfully listed!')
+    flash('Show was successfully displayed')
   else:
-    flash('An error occurred. Show could not be listed.')
+    flash('Error. Show could not be displyed.')
 
   return redirect(url_for('index'))
 
